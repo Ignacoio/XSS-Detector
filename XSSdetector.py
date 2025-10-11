@@ -9,6 +9,7 @@ with open("payloads.txt", encoding="utf-8") as f:
 for payload in payloads: 
     payload = payload.strip()
     params= {'name':payload}
+    data={"message": payload}
     
     
     for m in methods:
@@ -16,7 +17,7 @@ for payload in payloads:
             if m == "GET":
                 r = requests.get(url, params=params, timeout=timeout)
             else:
-                r = requests.post(url, params=params, timeout=timeout)
+                 r = requests.post(url, data=data, timeout=timeout)
         except requests.exceptions.Timeout as t:
             print("se ha acabado el tiempo", t)
             continue
