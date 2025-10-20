@@ -10,6 +10,7 @@ def get():
 def post():
     message= request.form.get("message","hola que tal")
     return f"{message}"
+    #return f"{escape(message)}"
 if __name__== '__main__':
     app.run(debug=True)
     
