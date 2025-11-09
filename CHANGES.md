@@ -1,5 +1,36 @@
 Changes:
 # Changelog
+## [2025-11-09]
+
+### Files modificados
+- `app.py`
+- `XSSdetector.py`
+
+
+---
+
+
+### app.py
+#### Added
+- Se ha añadido un header de defensa `response.headers['X-Content-Type-Options'] = 'nosniff'`, que mitiga el header de ataque conocido como `X-Content-Type-Options`.
+- Se ha añadido al header de defensa la politica de defensa conocida como `Content-Security-Policy`:  `response.headers['Content-Security-Policy']`
+- Las medidas de seguridad se muestran "#", para que el usuario prueba las dos versiones; la version con las politicas y mitigacion de defensa y la versión insegura.
+- IMPORTANTE, la politica CSP, se ha puesto lo más restrictiva posible, eso implica, que, aunque los scripts sean propios, no se podrán ejecutar. En este caso, no es necesario ponerlos en modo "self" porque el servidor tiene las minimas funciones posibles, pero lo recomendado es ser un poco más laxo con la seguridad, para poder ejecutar archivos propios.
+
+#### Objetivo / Beneficio
+- Al añadir esta capa de defensa(CSP),CSP define qué fuentes de contenido son confiables, evitando que scripts maliciosos se ejecuten en la página.
+- El header X-Content-Type-Options: nosniff le indica al navegador que no adivine el tipo de un archivo y respete estrictamente el Content-Type, evitando que contenido malicioso se ejecute como scripts y reduciendo el riesgo de XSS.
+
+---
+### XSSdetector.py
+#### Added
+- Se han añadido dos nuevos headers de ataque: `headers = {"User-Agent": "curl/7.88.1","X-Forwarded-For": "203.0.113.195, 70.41.3.18, 150.172.238.178"}`
+
+#### Objetivo / Beneficio
+- El header `User-Agent`, indica al servidor información sobre el navegador o cliente que realiza la petición; puede ser manipulado por un atacante para evadir filtros.
+- El header `X-Forwarded-For`, permite al ataque falsificar la dirección IP, gracias a una ruta, por la que la IP falsa recorre unos supuestos proxies.
+
+# Changelog
 ## [2025-10-20]
 
 ### Files modificados
